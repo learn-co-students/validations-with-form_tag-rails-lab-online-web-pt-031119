@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
-class PostsController < ApplicationController
-  def show
+  
+ def show
     @post = Post.find(params[:id])
   end
 
-  def new
-    @post = Post.new
+  def edit
+    @post = Post.find(params[:id])
   end
 
   def create
@@ -18,13 +18,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-    @post = Post.find(params[:id])
-  end
-
   def update
     @post = Post.find(params[:id])
+    #@post.update(post_params)
     if @post.update(post_params)
+      @post.update(post_params)
       redirect_to post_path(@post)
     else
       render :edit
@@ -36,6 +34,5 @@ class PostsController < ApplicationController
   def post_params
     params.permit(:title, :category, :content)
   end
-end
 
 end
